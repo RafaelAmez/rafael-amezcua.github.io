@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rafael Amezcua — Marketing & Branding</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f0f5f2;
+  --dark:#0a1f15;
+  --terra:#0d6e4f;
+  --terra2:#12a372;
+  --cream:#ffffff;
+  --muted:#6b8f7e;
+  --border:#c8ddd6;
+  --card:#f7faf9;
+  --font:'Raleway',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--dark);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 3rem;
+  transition:background 0.4s,box-shadow 0.4s;
+}
+nav.scrolled{background:rgba(10,31,21,0.97);box-shadow:0 2px 20px rgba(0,0,0,0.2);}
+.nav-logo{color:var(--cream);font-weight:800;font-size:1.1rem;letter-spacing:0.06em;opacity:0;transition:opacity 0.4s;}
+nav.scrolled .nav-logo{opacity:1;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:rgba(253,246,236,0.7);text-decoration:none;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--terra2);}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;background:var(--dark);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 3rem 5rem;position:relative;overflow:hidden;
+}
+.hero-grain{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;
+}
+.hero-glow{
+  position:absolute;bottom:-10%;left:-5%;
+  width:60vw;height:60vw;max-width:700px;max-height:700px;
+  background:radial-gradient(circle,rgba(13,110,79,0.25) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-line{
+  width:2px;height:0;background:var(--terra);
+  margin-bottom:2rem;transition:height 1s ease;
+}
+.hero-line.visible{height:80px;}
+.hero-eyebrow{
+  font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--terra2);font-weight:600;margin-bottom:1.2rem;
+  opacity:0;transform:translateY(10px);transition:opacity 0.7s 0.2s,transform 0.7s 0.2s;
+}
+.hero-eyebrow.visible{opacity:1;transform:translateY(0);}
+.hero-name{
+  font-size:clamp(4rem,11vw,9rem);font-weight:900;
+  color:var(--cream);line-height:0.92;letter-spacing:-0.03em;
+  margin-bottom:0.6rem;
+  opacity:0;transform:translateY(30px);transition:opacity 0.8s 0.3s,transform 0.8s 0.3s;
+}
+.hero-name.visible{opacity:1;transform:translateY(0);}
+.hero-name .outline{
+  -webkit-text-stroke:2px var(--terra);
+  color:transparent;
+}
+.hero-sub{
+  font-size:clamp(0.9rem,2vw,1.1rem);color:rgba(253,246,236,0.5);
+  max-width:500px;line-height:1.7;margin-top:1.5rem;
+  opacity:0;transform:translateY(20px);transition:opacity 0.8s 0.5s,transform 0.8s 0.5s;
+}
+.hero-sub.visible{opacity:1;transform:translateY(0);}
+.hero-scroll{
+  position:absolute;right:3rem;bottom:3rem;
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:rgba(253,246,236,0.35);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  opacity:0;animation:fadeInScroll 1s 1.4s forwards;
+}
+.hero-scroll-line{width:1px;height:50px;background:rgba(253,246,236,0.2);animation:scrollPulse 2s 1.5s infinite;}
+@keyframes scrollPulse{0%,100%{opacity:0.2;}50%{opacity:0.7;}}
+@keyframes fadeInScroll{to{opacity:1;}}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:0.7rem;margin-top:2.5rem;
+  background:var(--terra);color:var(--cream);font-weight:700;
+  padding:1rem 2.2rem;border-radius:0.4rem;text-decoration:none;
+  font-size:0.95rem;width:fit-content;
+  transition:background 0.2s,transform 0.2s;
+  opacity:0;transform:translateY(20px);transition:opacity 0.8s 0.7s,transform 0.8s 0.7s,background 0.2s;
+}
+.hero-cta.visible{opacity:1;transform:translateY(0);}
+.hero-cta:hover{background:var(--terra2);transform:translateY(-2px);}
+
+/* ── SHARED ── */
+section{padding:7rem 3rem;}
+.container{max-width:960px;margin:0 auto;}
+.s-label{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra);font-weight:700;margin-bottom:0.5rem;}
+.s-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:0.8rem;letter-spacing:-0.02em;}
+.s-divider{width:2.5rem;height:3px;background:var(--terra);border-radius:2px;margin-bottom:3rem;}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ── ABOUT ── */
+#about{background:var(--cream);}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:center;}
+.about-img-wrap{
+  aspect-ratio:3/4;border-radius:0.8rem;overflow:hidden;
+  background:var(--dark);display:flex;align-items:center;justify-content:center;
+  font-size:6rem;border:2px solid var(--border);position:relative;
+}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.about-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(13,110,79,0.15),transparent);
+}
+.about-text p{color:#5a4535;line-height:1.85;margin-bottom:1.2rem;font-size:1rem;}
+.pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.8rem;}
+.pill{background:var(--dark);color:var(--terra2);border-radius:2rem;padding:0.3rem 1rem;font-size:0.78rem;font-weight:600;}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg);}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.proj-card.wide{grid-column:1 / -1;}
+.proj-card{
+  background:var(--card);border-radius:1rem;overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(13,110,79,0.15);}
+.proj-thumb{
+  height:220px;position:relative;overflow:hidden;}
+.carousel-track{display:flex;height:100%;transition:transform 0.4s ease;}
+.carousel-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);color:#fff;border:2px solid rgba(255,255,255,0.3);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;z-index:10;padding:0;}
+.carousel-btn:hover{background:var(--terra);}
+.carousel-btn.prev{left:12px;}
+.carousel-btn.next{right:12px;}
+.carousel-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;border:none;padding:0;}
+.dot.active{background:#fff;
+}
+.proj-thumb.if{background:linear-gradient(135deg,#0a1f15,#0d3d28);}
+.proj-thumb.cc{background:linear-gradient(135deg,#1a3020,#2d5a27);}
+.proj-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.3),transparent);}
+.proj-body{padding:1.6rem;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.8rem;}
+.tag{background:rgba(13,110,79,0.1);color:var(--terra);border-radius:0.3rem;padding:0.2rem 0.65rem;font-size:0.72rem;font-weight:700;letter-spacing:0.03em;}
+.proj-title{font-size:1.25rem;font-weight:800;margin-bottom:0.5rem;}
+.proj-desc{font-size:0.88rem;color:#6b5040;line-height:1.7;}
+
+/* ── SKILLS ── */
+#skills{background:var(--dark);}
+#skills .s-title{color:var(--cream);}
+#skills .s-label{color:var(--terra2);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
+.skill-group h3{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.skill-tag{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.8);border:1px solid rgba(13,110,79,0.35);border-radius:0.4rem;padding:0.45rem 0.9rem;font-size:0.82rem;font-weight:500;transition:background 0.2s,border-color 0.2s,color 0.2s;}
+.skill-tag:hover{background:rgba(13,110,79,0.2);border-color:var(--terra2);color:var(--terra2);}
+
+/* ── RESUME ── */
+#resume{background:var(--cream);}
+.resume-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;}
+.dl-btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--terra);color:var(--cream);font-weight:700;
+  padding:0.8rem 1.8rem;border-radius:0.4rem;text-decoration:none;
+  font-size:0.88rem;transition:background 0.2s,transform 0.2s;white-space:nowrap;
+}
+.dl-btn:hover{background:var(--terra2);transform:translateY(-2px);}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:2.8rem;}
+.tl-item::before{content:'';position:absolute;left:-2.38rem;top:0.4rem;width:12px;height:12px;border-radius:50%;background:var(--terra);border:2px solid var(--cream);box-shadow:0 0 0 3px rgba(13,110,79,0.25);}
+
+.tl-date{font-size:0.73rem;color:var(--terra);font-weight:700;letter-spacing:0.06em;margin-bottom:0.2rem;}
+.tl-role{font-size:1rem;font-weight:800;color:var(--dark);}
+.tl-place{font-size:0.85rem;color:var(--muted);margin-bottom:0.4rem;}
+.tl-desc{font-size:0.88rem;color:#6b5040;line-height:1.65;}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
+.contact-info p{color:#6b5040;line-height:1.85;margin-bottom:2rem;font-size:1rem;}
+.c-link{
+  display:flex;align-items:center;gap:0.8rem;
+  text-decoration:none;color:var(--dark);font-weight:600;font-size:0.9rem;
+  margin-bottom:1rem;transition:color 0.2s;
+}
+.c-link:hover{color:var(--terra);}
+.c-icon{
+  width:2rem;height:2rem;background:var(--dark);color:var(--terra2);
+  border-radius:0.4rem;display:flex;align-items:center;
+  justify-content:center;font-size:0.78rem;flex-shrink:0;
+}
+.form-group{margin-bottom:1.2rem;}
+.form-group label{display:block;font-size:0.8rem;font-weight:700;letter-spacing:0.04em;color:var(--dark);margin-bottom:0.45rem;}
+.form-group input,.form-group textarea{
+  width:100%;padding:0.8rem 1rem;
+  border:1.5px solid var(--border);border-radius:0.5rem;
+  font-family:var(--font);font-size:0.9rem;color:var(--dark);
+  background:var(--cream);outline:none;transition:border-color 0.2s;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--terra);}
+.form-group textarea{resize:vertical;min-height:130px;}
+.form-submit{
+  width:100%;background:var(--dark);color:var(--cream);font-weight:700;
+  padding:0.9rem;border-radius:0.5rem;border:none;
+  font-family:var(--font);font-size:0.95rem;cursor:pointer;
+  transition:background 0.2s,transform 0.2s;
+}
+.form-submit:hover{background:var(--terra);transform:translateY(-1px);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);color:rgba(253,246,236,0.3);
+  text-align:center;padding:1.8rem;font-size:0.8rem;letter-spacing:0.03em;
+}
+footer span{color:var(--terra2);}
+
+@media(max-width:700px){
+  nav{padding:1rem 1.2rem;}
+  #hero{padding:0 1.5rem 4rem;}
+  section{padding:5rem 1.5rem;}
+  .about-grid,.proj-grid,.contact-grid{grid-template-columns:1fr;}
+  .proj-card.wide{grid-column:1;}
+  .resume-top{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Rafael Amezcua</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-scroll">Scroll<div class="hero-scroll-line"></div></div>
+
+  <div class="hero-line" id="heroLine"></div>
+  <p class="hero-eyebrow" id="heroEyebrow">Marketing · Branding · Strategy</p>
+  <h1 class="hero-name" id="heroName">
+    Rafael<br/><span class="outline">Amezcua</span>
+  </h1>
+  <p class="hero-sub" id="heroSub">
+    U.S. Navy veteran. Project Manager. Aspiring Marketing Analyst.<br/>
+    Crafting identities and campaigns that leave a mark.
+  </p>
+  <a href="#projects" class="hero-cta" id="heroCta">View My Work →</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <img src="headshot.webp" alt="Rafael Amezcua"/>
+      </div>
+      <div class="fade-in">
+        <p class="s-label">About Me</p>
+        <h2 class="s-title">Where strategy meets creativity.</h2>
+        <div class="s-divider"></div>
+        <div class="about-text">
+          <p>I'm a U.S. Navy veteran and a Business Marketing student at the University of San Diego, driven by a passion for purposeful brand-building and creative storytelling.</p>
+          <p>From founding sustainability initiatives to designing brand identities, I bring a strategic mindset and hands-on design skills to every project, always focused on impact over noise.</p>
+          <p>Currently building my expertise in digital marketing and project management while connecting with brands like Gensler, Sun Bum, and BASK Digital that share a passion for meaningful work.</p>
+        </div>
+        <div class="pills">
+          <span class="pill">USD Class of 28'</span>
+          <span class="pill">Navy Veteran</span>
+          <span class="pill">San Diego, CA</span>
+          <span class="pill">Open to Opportunities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="s-label fade-in">Selected Work</p>
+    <h2 class="s-title fade-in">Projects & Branding</h2>
+    <div class="s-divider fade-in"></div>
+    <div class="proj-grid">
+
+      <div class="proj-card fade-in">
+        <div class="proj-thumb if" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+          <div style="font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.08);letter-spacing:-4px;line-height:1;">IF</div>
+          <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.15);">Brand Identity</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="tag">Brand Identity</span><span class="tag">Logo Design</span><span class="tag">Illustrator</span><span class="tag">In Progress</span></div>
+          <div class="proj-title">Intertwine Fitness</div>
+          <p class="proj-desc">Developed the full brand identity for Intertwine Fitness, including the "IF" wordmark and logo system. Focused on conveying strength, connectivity, and motivation through clean geometric design.</p>
+        </div>
+      </div>
+
+  <div class="proj-card fade-in">
+        <div class="proj-thumb cc">
+         <div class="carousel-track" id="carousel-cc">
+           <div class="carousel-slide"><img src="Me.JPG" style="object-position: center 30%;"/></div>
+          <div class="carousel-slide"><img src="Bart.jpg" style="object-position: center 30%;"></div>
+          <div class="carousel-slide"><img src="Clothes.jpg" style="object-position: center 1%;"></div>
+         </div>
+        <button class="carousel-btn prev" onclick="moveCarousel('cc',-1)">&#8249;</button>
+        <button class="carousel-btn next" onclick="moveCarousel('cc',1)">&#8250;</button>
+        <div class="carousel-dots" id="dots-cc">
+         <div class="dot active" onclick="goToSlide('cc',0)"></div>
+          <div class="dot" onclick="goToSlide('cc',1)"></div>
+           <div class="dot" onclick="goToSlide('cc',2)"></div>
+       </div>
+    </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="tag">Sustainability</span><span class="tag">Campaign Strategy</span><span class="tag">Marketing</span></div>
+          <div class="proj-title">Cycle Care</div>
+          <p class="proj-desc">Founded and led Cycle Care, a textile waste sustainability initiative at SDCC. Developed brand strategy, messaging framework, and outreach materials to drive community engagement.</p> <a href="Winnie and Rafael Final Impact Report.pdf" target="_blank" style="display:inline-block;margin-top:1rem;background:var(--terra);color:var(--cream);padding:0.5rem 1.2rem;border-radius:0.4rem;font-size:0.82rem;font-weight:700;text-decoration:none;">View Impact Report →</a>
+        </div>
+      </div>
+
+      <div class="proj-card wide fade-in">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0d0d0d,#1a1a2e);height:220px;display:flex;align-items:center;justify-content:center;padding:2rem;gap:2rem;">
+          <div style="flex:1;max-width:420px;">
+            <div style="background:#141414;border:1px solid #222;border-radius:10px;overflow:hidden;">
+              <div style="background:#131313;padding:8px 14px;display:flex;gap:6px;border-bottom:1px solid #1e1e1e;">
+                <div style="width:8px;height:8px;border-radius:50%;background:#c46a6a;"></div>
+                <div style="width:8px;height:8px;border-radius:50%;background:#d4a847;"></div>
+                <div style="width:8px;height:8px;border-radius:50%;background:#5aad6a;"></div>
+              </div>
+              <div style="padding:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+                <div style="background:#1e1e1e;border-radius:6px;padding:8px 10px;">
+                  <div style="font-size:8px;color:#333;text-transform:uppercase;margin-bottom:4px;">Total</div>
+                  <div style="font-size:16px;font-weight:bold;color:#7f77dd;">12</div>
+                </div>
+                <div style="background:#1e1e1e;border-radius:6px;padding:8px 10px;">
+                  <div style="font-size:8px;color:#333;text-transform:uppercase;margin-bottom:4px;">Applied</div>
+                  <div style="font-size:16px;font-weight:bold;color:#d4a847;">7</div>
+                </div>
+                <div style="background:#1e1e1e;border-radius:6px;padding:8px 10px;">
+                  <div style="font-size:8px;color:#333;text-transform:uppercase;margin-bottom:4px;">Interview</div>
+                  <div style="font-size:16px;font-weight:bold;color:#6a9fd8;">3</div>
+                </div>
+                <div style="background:#1e1e1e;border-radius:6px;padding:8px 10px;">
+                  <div style="font-size:8px;color:#333;text-transform:uppercase;margin-bottom:4px;">Offers</div>
+                  <div style="font-size:16px;font-weight:bold;color:#5aad6a;">2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="color:rgba(127,119,221,0.15);font-size:5rem;font-weight:900;letter-spacing:-4px;font-family:monospace;">&lt;/&gt;</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags"><span class="tag">Full-Stack</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">JavaScript</span></div>
+          <div class="proj-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            JobTracker
+            <a href="https://jobtracker-up.up.railway.app" target="_blank" style="font-size:0.78rem;font-weight:700;color:var(--terra);text-decoration:none;border:1px solid rgba(13,110,79,0.3);padding:0.25rem 0.8rem;border-radius:0.3rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(13,110,79,0.1)'" onmouseout="this.style.background='transparent'">View Live →</a>
+          </div>
+          <p class="proj-desc">Built a full-stack job application tracker from scratch — Node.js/Express backend, PostgreSQL database, JWT authentication, and a clean vanilla JS frontend. Features include a monthly interview calendar, weekly goal tracker, and live application stats. Deployed on Railway.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="s-label fade-in">What I Bring</p>
+    <h2 class="s-title fade-in">Skills & Tools</h2>
+    <div class="s-divider fade-in"></div>
+    <div class="skills-grid fade-in">
+      <div class="skill-group">
+        <h3>Marketing</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Brand Strategy</span>
+          <span class="skill-tag">Campaign Planning</span>
+          <span class="skill-tag">Content Marketing</span>
+          <span class="skill-tag">Market Research</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Design</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Adobe Photoshop</span>
+          <span class="skill-tag">Adobe Illustrator</span>
+          <span class="skill-tag">Logo Design</span>
+          <span class="skill-tag">Visual Identity</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Management</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Project Management</span>
+          <span class="skill-tag">Team Leadership</span>
+          <span class="skill-tag">Strategic Planning</span>
+          <span class="skill-tag">Public Speaking</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Clickup</span>
+          <span class="skill-tag">Project Management Tools</span>
+          <span class="skill-tag">Google Workspace</span>
+          <span class="skill-tag">Slack</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="container">
+    <div class="resume-top fade-in">
+      <div>
+        <p class="s-label">Experience & Education</p>
+        <h2 class="s-title">Resume</h2>
+        <div class="s-divider"></div>
+      </div>
+      <a href="Rafael_Amezcua_Resume_2026.pdf" target="_blank" class="dl-btn">⬇ Download Resume (PDF)</a>
+    </div>
+    <div class="timeline fade-in">
+      <div class="tl-item">
+        <div class="tl-date">2025 – Present</div>
+        <div class="tl-role">B.S. Business Administration — Marketing</div>
+        <div class="tl-place">University of San Diego · Torero Transfer Scholar · VR&E/MVP Recipient</div>
+        <div class="tl-desc">Minor in Changemaking. Focused on marketing strategy, analytics, and entrepreneurship. Actively networking with brands including Gensler, Sun Bum, and BASK Digital.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025</div>
+        <div class="tl-role">Project Management Intern</div>
+        <div class="tl-place">Aspire</div>
+        <div class="tl-desc">Developed professional marketing and communications skills, building deliverables and refining cross-functional project skills in a structured internship environment.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2024 – 2025</div>
+        <div class="tl-role">VP, Mock Trial · Director of Membership, PTK</div>
+        <div class="tl-place">San Diego City College</div>
+        <div class="tl-desc">Led recruitment, engagement, and organizational strategy for two campus organizations. Built public speaking, team leadership, and event planning capabilities.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025</div>
+        <div class="tl-role">Founder — Cycle Care</div>
+        <div class="tl-place">SDCC · Sustainability Initiative</div>
+        <div class="tl-desc">Launched a textile waste and sustainability brand from concept to community campaign, handling branding, outreach, and strategic partnerships.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Prior</div>
+        <div class="tl-role">Active Duty Service Member</div>
+        <div class="tl-place">United States Navy</div>
+        <div class="tl-desc">Served honorably in the Navy, building discipline, leadership, and operational coordination skills that continue to shape my professional approach.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="s-label fade-in">Let's Connect</p>
+    <h2 class="s-title fade-in">Get In Touch</h2>
+    <div class="s-divider fade-in"></div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <p class="contact-info" style="margin-bottom:2.5rem;">Whether you're a brand looking for a collaborator, a company with an internship opportunity, or just want to connect — I'd love to hear from you.</p>
+        <a href="mailto:ramezcua12@gmail.com" class="c-link"><span class="c-icon">✉</span>ramezcua12@gmail.com</a>
+        <a href="https://www.linkedin.com/in/rafael-amezcua/" target="_blank" class="c-link"><span class="c-icon">in</span>linkedin.com/in/rafael-amezcua</a>
+        <a href="Rafael_Amezcua_Resume_2026.pdf" target="_blank" class="c-link"><span class="c-icon">📄</span>Download Resume</a>
+      </div>
+      <div class="fade-in">
+        <form action="https://formspree.io/f/xnjgpeza" method="POST">
+          <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name"/></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com"/></div>
+          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell me about your project or opportunity..."></textarea></div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 <span>Rafael Amezcua</span> · San Diego, CA</p></footer>
+
+<script>
+  // Carousel
+  const carouselState = {};
+function getSlides(id){ return document.querySelectorAll(`#carousel-${id} .carousel-slide`); }
+function moveCarousel(id, dir){
+  const slides = getSlides(id);
+  carouselState[id] = ((carouselState[id]||0) + dir + slides.length) % slides.length;
+  updateCarousel(id);
+}
+function goToSlide(id, idx){
+  carouselState[id] = idx;
+  updateCarousel(id);
+}
+function updateCarousel(id){
+  const idx = carouselState[id] || 0;
+  document.getElementById(`carousel-${id}`).style.transform = `translateX(-${idx * 100}%)`;
+  document.querySelectorAll(`#dots-${id} .dot`).forEach((d,i) => d.classList.toggle('active', i===idx));
+}
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero reveal on load
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('heroLine').classList.add('visible'), 200);
+    setTimeout(() => document.getElementById('heroEyebrow').classList.add('visible'), 400);
+    setTimeout(() => document.getElementById('heroName').classList.add('visible'), 500);
+    setTimeout(() => document.getElementById('heroSub').classList.add('visible'), 700);
+    setTimeout(() => document.getElementById('heroCta').classList.add('visible'), 900);
+  });
+
+  // Fade in on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Active nav
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    links.forEach(a => { a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--terra2)' : ''; });
+  });
+</script>
+</body>
+</html>
