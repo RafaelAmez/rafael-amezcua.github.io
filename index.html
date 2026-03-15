@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Rafael Amezcua — Marketing & Branding</title>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -140,10 +141,17 @@ nav.scrolled .nav-logo{opacity:1;}
 
 /* ── HERO ── */
 #hero{
-  min-height:100vh;background:var(--dark);
+  min-height:100vh;
+  background:url('balboa.jpg') center center / cover no-repeat;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:0 3rem 5rem;position:relative;overflow:hidden;
 }
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,18,10,0.97) 0%,rgba(5,18,10,0.65) 40%,rgba(5,18,10,0.2) 100%);
+  pointer-events:none;z-index:0;
+}
+#hero > *{position:relative;z-index:1;}
 .hero-grain{
   position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -162,27 +170,47 @@ nav.scrolled .nav-logo{opacity:1;}
 .hero-line.visible{height:80px;}
 .hero-eyebrow{
   font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--terra2);font-weight:600;margin-bottom:1.2rem;
+  color:#fff;font-weight:700;margin-bottom:1.2rem;
+  text-shadow:0 2px 12px rgba(0,0,0,0.7);
   opacity:0;transform:translateY(10px);transition:opacity 0.7s 0.2s,transform 0.7s 0.2s;
 }
 .hero-eyebrow.visible{opacity:1;transform:translateY(0);}
 .hero-name{
   font-size:clamp(4rem,11vw,9rem);font-weight:900;
-  color:var(--cream);line-height:0.92;letter-spacing:-0.03em;
+  color:#fff;line-height:0.92;letter-spacing:-0.03em;
   margin-bottom:0.6rem;
+  text-shadow:0 4px 40px rgba(0,0,0,0.7),0 2px 8px rgba(0,0,0,0.5);
   opacity:0;transform:translateY(30px);transition:opacity 0.8s 0.3s,transform 0.8s 0.3s;
 }
 .hero-name.visible{opacity:1;transform:translateY(0);}
 .hero-name .outline{
-  -webkit-text-stroke:2px var(--terra);
+  -webkit-text-stroke:2.5px rgba(255,255,255,0.85);
   color:transparent;
+  text-shadow:none;
+  filter:drop-shadow(0 0 12px rgba(18,163,114,0.5));
 }
 .hero-sub{
-  font-size:clamp(0.9rem,2vw,1.1rem);color:rgba(253,246,236,0.5);
+  font-size:clamp(0.9rem,2vw,1.1rem);color:#fff;
   max-width:500px;line-height:1.7;margin-top:1.5rem;
+  text-shadow:0 2px 14px rgba(0,0,0,0.85);
   opacity:0;transform:translateY(20px);transition:opacity 0.8s 0.5s,transform 0.8s 0.5s;
 }
 .hero-sub.visible{opacity:1;transform:translateY(0);}
+/* ── HERO LOCATION BADGE ── */
+.hero-location{
+  position:absolute;top:5.5rem;right:3rem;z-index:2;
+  display:flex;align-items:center;gap:0.45rem;
+  color:rgba(255,255,255,0.88);font-size:0.75rem;
+  font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  text-shadow:0 2px 10px rgba(0,0,0,0.7);
+}
+.hero-location::before{
+  content:'';display:block;width:6px;height:6px;border-radius:50%;
+  background:var(--terra2);box-shadow:0 0 8px rgba(18,163,114,0.8);
+  animation:pulse 2s infinite;
+}
+@media(max-width:700px){.hero-location{top:4.5rem;right:1.5rem;font-size:0.68rem;}}
+
 .hero-scroll{
   position:absolute;right:3rem;bottom:3rem;
   display:flex;flex-direction:column;align-items:center;gap:0.5rem;
@@ -219,6 +247,7 @@ section{padding:7rem 3rem;}
   aspect-ratio:3/4;border-radius:0.8rem;overflow:hidden;
   background:var(--dark);display:flex;align-items:center;justify-content:center;
   font-size:6rem;border:2px solid var(--border);position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35),0 6px 20px rgba(0,0,0,0.2);
 }
 .about-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
 .about-img-wrap::after{
@@ -331,17 +360,118 @@ footer{
 }
 footer span{color:var(--terra2);}
 
+/* ── FLOAT CTA (mobile) ── */
+.float-cta{
+  position:fixed;bottom:5.8rem;right:1.2rem;z-index:290;
+  background:var(--terra);color:var(--cream);
+  padding:0.7rem 1.3rem;border-radius:2rem;
+  font-weight:700;font-size:0.82rem;text-decoration:none;
+  box-shadow:0 4px 22px rgba(13,110,79,0.45);
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity 0.35s,transform 0.35s,background 0.2s;
+  display:none;
+}
+.float-cta.visible{opacity:1;transform:translateY(0);pointer-events:all;}
+.float-cta:hover{background:var(--terra2);}
+
+/* ── BOTTOM TAB BAR (mobile) ── */
+.bottom-tab-bar{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:rgba(10,31,21,0.97);
+  border-top:1px solid rgba(200,221,214,0.1);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.btb-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:3px;text-decoration:none;color:rgba(253,246,236,0.4);
+  padding:0.55rem 0.3rem;transition:color 0.2s;
+}
+.btb-item.active,.btb-item:hover{color:var(--terra2);}
+.btb-icon{font-size:1.05rem;line-height:1;display:block;}
+.btb-label{font-size:0.55rem;letter-spacing:0.07em;text-transform:uppercase;}
+
+/* ── ABOUT READ MORE (mobile only) ── */
+.read-more-btn{
+  display:none;background:none;border:none;color:var(--terra);
+  font-weight:700;font-size:0.85rem;cursor:pointer;
+  margin-top:0.8rem;letter-spacing:0.04em;font-family:var(--font);
+  padding:0;transition:color 0.2s;
+}
+.read-more-btn:hover{color:var(--terra2);}
+
+/* ── HAMBURGER ── */
+.nav-hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  padding:0.4rem;flex-direction:column;gap:5px;align-items:center;justify-content:center;
+}
+.nav-hamburger span{display:block;width:22px;height:2px;background:rgba(253,246,236,0.8);transition:all 0.3s ease;border-radius:1px;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── MOBILE NAV OVERLAY ── */
+#mobile-nav-overlay{
+  position:fixed;inset:0;background:rgba(10,31,21,0.98);z-index:190;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;pointer-events:none;transition:opacity 0.35s ease;
+}
+#mobile-nav-overlay.open{opacity:1;pointer-events:all;}
+#mobile-nav-overlay a{
+  color:rgba(253,246,236,0.85);text-decoration:none;font-size:2rem;
+  font-weight:800;letter-spacing:0.04em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+#mobile-nav-overlay a:hover{color:var(--terra2);}
+
 @media(max-width:700px){
   nav{padding:1rem 1.2rem;}
-  #hero{padding:0 1.5rem 4rem;}
+  .nav-links{display:none;}
+  .nav-hamburger{display:none!important;}
+  #hero{padding:5rem 1.5rem 4rem;}
+  .hero-eyebrow{letter-spacing:0.1em;font-size:0.68rem;}
+  .hero-scroll{display:none;}
   section{padding:5rem 1.5rem;}
-  .about-grid,.proj-grid,.contact-grid{grid-template-columns:1fr;}
-  .proj-card.wide{grid-column:1;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;}
+  .about-img-wrap{max-height:380px;aspect-ratio:unset;}
+  .about-more{max-height:0;overflow:hidden;transition:max-height 0.5s ease;}
+  .about-more.open{max-height:500px;}
+  .read-more-btn{display:inline-block;}
+  /* Swipeable project cards */
+  .proj-grid{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:1rem;padding:0 1.5rem 1rem;margin:0 -1.5rem;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .proj-grid::-webkit-scrollbar{display:none;}
+  .proj-grid .proj-card{min-width:82vw;scroll-snap-align:start;flex-shrink:0;}
+  .proj-card.wide{grid-column:unset;min-width:88vw;}
   .resume-top{flex-direction:column;align-items:flex-start;}
+  /* Skill accordion */
+  .skills-grid{grid-template-columns:1fr;gap:0;border-top:1px solid rgba(255,255,255,0.06);}
+  .skill-group{border-bottom:1px solid rgba(255,255,255,0.06);padding:0.9rem 0;}
+  .skill-group h3{cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:0;padding:0.2rem 0;font-size:0.78rem;}
+  .skill-group h3::after{content:'+';color:var(--muted);font-size:1.1rem;font-weight:300;}
+  .skill-group.open h3::after{content:'−';}
+  .skill-tags{max-height:0;overflow:hidden;transition:max-height 0.4s ease,margin-top 0.3s ease;}
+  .skill-group.open .skill-tags{max-height:200px;margin-top:0.85rem;}
+  /* Bottom spacing for tab bar */
+  body{padding-bottom:68px;}
+  .float-cta{display:block;}
+  .bottom-tab-bar{display:flex;}
 }
 </style>
 </head>
 <body>
+
+<!-- MOBILE NAV OVERLAY -->
+<div id="mobile-nav-overlay">
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#projects" onclick="closeMobileNav()">Work</a>
+  <a href="#skills" onclick="closeMobileNav()">Skills</a>
+  <a href="#resume" onclick="closeMobileNav()">Resume</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -353,12 +483,15 @@ footer span{color:var(--terra2);}
     <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-grain"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-location">Based in San Diego, CA</div>
   <div class="hero-scroll">Scroll<div class="hero-scroll-line"></div></div>
 
   <div class="hero-line" id="heroLine"></div>
@@ -386,8 +519,11 @@ footer span{color:var(--terra2);}
         <div class="s-divider"></div>
         <div class="about-text">
           <p>I am a U.S. Navy Veteran and Marketing student at USD, blending operational discipline with data-driven creativity. I don't just build campaigns; I build the technical systems that power them.</p>
-          <p>From designing brand identities in Illustrator to architecting PostgreSQL databases, I bridge the gap between high-level strategy and hands-on execution.</p>
-          <p>Currently focused on Marketing Analytics and seeking collaborations with forward-thinking teams.</p>
+          <div class="about-more" id="aboutMore">
+            <p>From designing brand identities in Illustrator to architecting PostgreSQL databases, I bridge the gap between high-level strategy and hands-on execution.</p>
+            <p>Currently focused on Marketing Analytics and seeking collaborations with forward-thinking teams.</p>
+          </div>
+          <button class="read-more-btn" id="readMoreBtn" onclick="toggleAbout()">Read more ↓</button>
         </div>
         <div class="pills">
           <span class="pill">USD Class of 28'</span>
@@ -537,7 +673,9 @@ footer span{color:var(--terra2);}
           <span class="skill-tag">JavaScript (ES6+)</span>
           <span class="skill-tag">REST APIs</span>
           <span class="skill-tag">HTML</span>
+        </div>
       </div>
+    </div>
   </div>
 </section>
 
@@ -550,7 +688,7 @@ footer span{color:var(--terra2);}
         <h2 class="s-title">Resume</h2>
         <div class="s-divider"></div>
       </div>
-      <a href="Rafael_Amezcua_Resume_2026.pdf" target="_blank" class="dl-btn">⬇ Download Resume (PDF)</a>
+      <a href="Rafael_Amezcua_CareerFair_2026.pdf" target="_blank" class="dl-btn">⬇ Download Resume (PDF)</a>
     </div>
     <div class="timeline fade-in">
       <div class="tl-item">
@@ -598,7 +736,7 @@ footer span{color:var(--terra2);}
         <p class="contact-info" style="margin-bottom:2.5rem;">Whether you're a brand looking for a collaborator, a company with an internship opportunity, or just want to connect — I'd love to hear from you.</p>
         <a href="mailto:ramezcua12@gmail.com" class="c-link"><span class="c-icon">✉</span>ramezcua12@gmail.com</a>
         <a href="https://www.linkedin.com/in/rafael-amezcua/" target="_blank" class="c-link"><span class="c-icon">in</span>linkedin.com/in/rafael-amezcua</a>
-        <a href="Rafael_Amezcua_Resume_2026.pdf" target="_blank" class="c-link"><span class="c-icon">📄</span>Download Resume</a>
+        <a href="Rafael_Amezcua_CareerFair_2026.pdf" target="_blank" class="c-link"><span class="c-icon">📄</span>Download Resume</a>
       </div>
       <div class="fade-in">
         <form action="https://formspree.io/f/xnjgpeza" method="POST">
@@ -616,6 +754,28 @@ footer span{color:var(--terra2);}
 
 <!-- Particles Container -->
 <div class="particles" id="particles"></div>
+
+<!-- FLOAT CTA (mobile) -->
+<a href="#contact" class="float-cta" id="floatCta">Let's Talk →</a>
+
+<!-- BOTTOM TAB BAR (mobile) -->
+<nav class="bottom-tab-bar" aria-label="Page navigation">
+  <a href="#about"   class="btb-item" data-section="about">
+    <span class="btb-icon">◉</span><span class="btb-label">About</span>
+  </a>
+  <a href="#projects" class="btb-item" data-section="projects">
+    <span class="btb-icon">⬡</span><span class="btb-label">Work</span>
+  </a>
+  <a href="#skills"  class="btb-item" data-section="skills">
+    <span class="btb-icon">◈</span><span class="btb-label">Skills</span>
+  </a>
+  <a href="#resume"  class="btb-item" data-section="resume">
+    <span class="btb-icon">☰</span><span class="btb-label">Resume</span>
+  </a>
+  <a href="#contact" class="btb-item" data-section="contact">
+    <span class="btb-icon">◎</span><span class="btb-label">Contact</span>
+  </a>
+</nav>
 
 <script>
   // ── PARTICLES GENERATION ──
@@ -654,7 +814,7 @@ footer span{color:var(--terra2);}
           lineIndex++;
           setTimeout(typeLine, 300);
         }
-      }, 35);
+      }, 17);
     }
   }
 
@@ -696,25 +856,56 @@ function updateCarousel(id){
     setTimeout(() => document.getElementById('heroCta').classList.add('visible'), 2500);
   });
 
-  // Fade in on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  // ── ANIME.JS SCROLL ANIMATIONS ──
+  function onEnter(el, fn, threshold){ threshold = threshold||0.15;
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if(e.isIntersecting){ fn(e.target); obs.unobserve(e.target); } });
+    }, {threshold}).observe(el);
+  }
 
-  // Paste this at the bottom of your script file
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-    }
+  // Also keep .fade-in working for anything not covered below
+  const legacyObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => legacyObs.observe(el));
+
+  // ABOUT — image slides from left, text from right
+  onEnter(document.querySelector('.about-img-wrap'), el => {
+    anime({ targets: el, translateX: [-70, 0], opacity: [0, 1], rotate: [-1.5, 0], duration: 950, easing: 'easeOutExpo' });
   });
-}, { threshold: 0.1 });
+  onEnter(document.querySelector('#about .fade-in:not(.about-img-wrap)'), el => {
+    anime({ targets: el.querySelectorAll('p, h2, .s-label, .s-divider, .pills'), translateY: [40, 0], opacity: [0, 1], duration: 700, delay: anime.stagger(90), easing: 'easeOutCubic' });
+  });
 
-document.querySelectorAll('section').forEach((section) => {
-  section.classList.add('reveal');
-  observer.observe(section);
-});
+  // PROJECT CARDS — stagger scale + float up
+  onEnter(document.querySelector('.proj-grid'), el => {
+    anime({ targets: el.querySelectorAll('.proj-card'), translateY: [60, 0], opacity: [0, 1], scale: [0.95, 1], duration: 750, delay: anime.stagger(130), easing: 'easeOutExpo' });
+  });
+
+  // SKILL TAGS — wave stagger
+  onEnter(document.querySelector('.skills-grid'), el => {
+    anime({ targets: el.querySelectorAll('.skill-group'), translateY: [30, 0], opacity: [0, 1], duration: 600, delay: anime.stagger(80), easing: 'easeOutCubic' });
+    anime({ targets: el.querySelectorAll('.skill-tag'), scale: [0.85, 1], opacity: [0, 1], duration: 500, delay: anime.stagger(35, {from:'center'}), easing: 'easeOutBack' });
+  }, 0.08);
+
+  // TIMELINE — slide in from left one by one
+  onEnter(document.querySelector('.timeline'), el => {
+    anime({ targets: el.querySelectorAll('.tl-item'), translateX: [-50, 0], opacity: [0, 1], duration: 650, delay: anime.stagger(110), easing: 'easeOutExpo' });
+  });
+
+  // CONTACT — left col drops in, form fields stagger up
+  onEnter(document.querySelector('.contact-grid'), el => {
+    anime({ targets: el.querySelector('.fade-in:first-child'), translateX: [-40, 0], opacity: [0, 1], duration: 700, easing: 'easeOutExpo' });
+    anime({ targets: el.querySelectorAll('.form-group, .form-submit'), translateY: [30, 0], opacity: [0, 1], duration: 550, delay: anime.stagger(80, {start: 200}), easing: 'easeOutCubic' });
+  }, 0.08);
+
+  // S-TITLE reveal — clip up
+  document.querySelectorAll('.s-title').forEach(el => {
+    el.style.overflow = 'hidden';
+    onEnter(el, target => {
+      anime({ targets: target, translateY: ['102%', '0%'], opacity: [0, 1], duration: 700, easing: 'easeOutExpo' });
+    });
+  });
 
   // Active nav
   const secs = document.querySelectorAll('section[id]');
@@ -724,6 +915,52 @@ document.querySelectorAll('section').forEach((section) => {
     secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
     links.forEach(a => { a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--terra2)' : ''; });
   });
+
+  // ── MOBILE NAV HAMBURGER ──
+  const navHamburger = document.getElementById('navHamburger');
+  const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+  function closeMobileNav(){
+    navHamburger.classList.remove('open');
+    mobileNavOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  navHamburger.addEventListener('click', () => {
+    const isOpen = mobileNavOverlay.classList.toggle('open');
+    navHamburger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // ── FLOAT CTA (mobile) ──
+  const floatCta = document.getElementById('floatCta');
+  window.addEventListener('scroll', () => {
+    const heroH = document.getElementById('hero').offsetHeight;
+    const contactTop = document.getElementById('contact').offsetTop;
+    const y = window.scrollY;
+    floatCta.classList.toggle('visible', y > heroH * 0.6 && y < contactTop - 200);
+  });
+
+  // ── BOTTOM TAB BAR ACTIVE STATE ──
+  const btbItems = document.querySelectorAll('.btb-item');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 150) cur = s.id; });
+    btbItems.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  });
+
+  // ── ABOUT READ MORE TOGGLE ──
+  function toggleAbout(){
+    const more = document.getElementById('aboutMore');
+    const btn  = document.getElementById('readMoreBtn');
+    const open = more.classList.toggle('open');
+    btn.textContent = open ? 'Show less ↑' : 'Read more ↓';
+  }
+
+  // ── SKILL ACCORDION (mobile only) ──
+  if(window.innerWidth <= 700){
+    document.querySelectorAll('.skill-group h3').forEach(h3 => {
+      h3.addEventListener('click', () => h3.parentElement.classList.toggle('open'));
+    });
+  }
 </script>
 </body>
 </html>
