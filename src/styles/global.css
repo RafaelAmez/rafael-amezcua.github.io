@@ -669,12 +669,22 @@ footer{background:var(--dark);padding:3rem 3rem 2rem;}
   /* Swipeable project cards */
   .proj-grid{
     display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
-    gap:1rem;padding:0 1.4rem 1rem;margin:0 -1.4rem;
+    gap:1rem;
+    padding:0 1.4rem 1.2rem;
+    margin:0 -1.4rem;
+    scroll-padding-left:1.4rem;
     -webkit-overflow-scrolling:touch;scrollbar-width:none;
   }
   .proj-grid::-webkit-scrollbar{display:none;}
-  .proj-grid .proj-card{min-width:80vw;scroll-snap-align:start;flex-shrink:0;}
-  .proj-card.wide{grid-column:unset;min-width:86vw;}
+  .proj-grid .proj-card,
+  .proj-card.wide{
+    grid-column:unset;
+    width:calc(100vw - 4rem);
+    min-width:calc(100vw - 4rem);
+    max-width:360px;
+    flex-shrink:0;
+    scroll-snap-align:start;
+  }
   /* All cards must be visible in scroll carousel — disable fade-in opacity lock */
   .proj-grid .proj-card.fade-in{opacity:1;transform:none;}
 
