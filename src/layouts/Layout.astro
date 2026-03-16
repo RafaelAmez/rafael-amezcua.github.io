@@ -192,6 +192,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       });
     });
 
+    // ── SKILLS ACCORDION (mobile) ──
+    document.querySelectorAll('.skill-group h3').forEach(h3 => {
+      h3.addEventListener('click', () => {
+        h3.closest('.skill-group').classList.toggle('open');
+      });
+    });
+
     // ── ACTIVE NAV LINKS ──
     const secs = document.querySelectorAll('section[id]');
     const links = document.querySelectorAll('.nav-links a');
