@@ -10,51 +10,87 @@ import clothesImg from '../assets/images/Clothes.jpg';
     <p class="s-label fade-in">Selected Work</p>
     <h2 class="s-title fade-in">Projects & Branding</h2>
     <div class="s-divider fade-in"></div>
-    <div class="proj-grid">
+
+    <!-- Tab bar -->
+    <div class="proj-tabs fade-in">
+      <button class="proj-tab active" onclick="switchTab('nymbus', this)">
+        <span class="proj-tab-num">01</span>
+        <span class="proj-tab-name">Nymbus</span>
+        <span class="proj-tab-type">Full-Stack App</span>
+      </button>
+      <button class="proj-tab" onclick="switchTab('intertwine', this)">
+        <span class="proj-tab-num">02</span>
+        <span class="proj-tab-name">Intertwine Fitness</span>
+        <span class="proj-tab-type">Brand & Web</span>
+      </button>
+      <button class="proj-tab" onclick="switchTab('cyclecare', this)">
+        <span class="proj-tab-num">03</span>
+        <span class="proj-tab-name">Cycle Care</span>
+        <span class="proj-tab-type">Campaign</span>
+      </button>
+    </div>
+
+    <!-- Spotlight panels -->
+    <div class="proj-spotlight fade-in">
+
+      <!-- Nymbus -->
+      <div class="proj-panel active" id="panel-nymbus">
+        <div class="proj-panel-img">
+          <img src="/nymbus-stock1.png" alt="Nymbus dashboard" />
+        </div>
+        <div class="proj-panel-info">
+          <div class="proj-tags">
+            <span class="tag">Full-Stack</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">PWA</span>
+            <span class="tag">Deployed</span>
+          </div>
+          <div class="proj-panel-title">Nymbus</div>
+          <p class="proj-desc">
+            <strong>Problem:</strong> Tracking job applications in a spreadsheet meant losing context, missing follow-ups, and no visibility into your pipeline.<br/><br/>
+            <strong>Built:</strong> A full-stack PWA with Node.js/Express, PostgreSQL, JWT auth, Kanban board, interview calendar, analytics dashboard, CSV export, and a bookmarklet for one-click saving from any job board.<br/><br/>
+            <strong>Result:</strong> Launched to real users — tracking <span id="nymbus-desc-total">hundreds of</span> applications across the platform.
+          </p>
+          <a href="https://nymbus.pro" target="_blank" class="proj-cta">View Live →</a>
+        </div>
+      </div>
 
       <!-- Intertwine Fitness -->
-      <div class="proj-card wide fade-in">
-        <div class="if-preview">
-          <img src="/if-stock1.png" alt="Intertwine Fitness website" class="if-screenshot" />
+      <div class="proj-panel" id="panel-intertwine">
+        <div class="proj-panel-img">
+          <img src="/if-stock1.png" alt="Intertwine Fitness website" />
         </div>
-        <div class="proj-body">
+        <div class="proj-panel-info">
           <div class="proj-tags">
             <span class="tag">Brand Identity</span>
             <span class="tag">Logo Design</span>
             <span class="tag">Web Design</span>
             <span class="tag">Illustrator</span>
-            <span class="tag">In Progress</span>
           </div>
-          <div class="proj-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
-            Intertwine Fitness
-            <a
-              href="https://www.intertwinefitness.com"
-              target="_blank"
-              style="font-size:0.78rem;font-weight:700;color:var(--terra);text-decoration:none;border:1px solid rgba(13,110,79,0.3);padding:0.25rem 0.8rem;border-radius:0.3rem;transition:all 0.2s;"
-              onmouseover="this.style.background='rgba(13,110,79,0.1)'"
-              onmouseout="this.style.background='transparent'"
-            >View Site →</a>
-          </div>
+          <div class="proj-panel-title">Intertwine Fitness</div>
           <p class="proj-desc">
-            <strong>Problem:</strong> A local fitness brand had no visual identity — no logo, no color system, no way to stand out in a crowded market.<br/>
-            <strong>Built:</strong> Designed the full brand identity from scratch — wordmark, logo system, color palette, and typography — using Illustrator with a focus on strength, connectivity, and movement.<br/>
+            <strong>Problem:</strong> A local fitness brand had no visual identity — no logo, no color system, no way to stand out in a crowded market.<br/><br/>
+            <strong>Built:</strong> Designed the full brand identity from scratch — wordmark, logo system, color palette, and typography — using Illustrator with a focus on strength, connectivity, and movement.<br/><br/>
             <strong>Result:</strong> A cohesive, production-ready brand system currently live at intertwinefitness.com.
           </p>
+          <a href="https://www.intertwinefitness.com" target="_blank" class="proj-cta">View Site →</a>
         </div>
       </div>
 
       <!-- Cycle Care -->
-      <div class="proj-card fade-in">
-        <div class="proj-thumb cc">
+      <div class="proj-panel" id="panel-cyclecare">
+        <div class="proj-panel-img cc-panel-img">
           <div class="carousel-track" id="carousel-cc">
             <div class="carousel-slide">
-              <Image src={meImg} alt="Cycle Care event" width={600} height={400} quality={80} loading="eager" style="object-position:center 30%;" />
+              <Image src={meImg} alt="Cycle Care event" width={800} height={500} quality={80} loading="eager" style="object-position:center 30%;" />
             </div>
             <div class="carousel-slide">
-              <Image src={bartImg} alt="Cycle Care volunteer" width={600} height={400} quality={80} style="object-position:center 30%;" />
+              <Image src={bartImg} alt="Cycle Care volunteer" width={800} height={500} quality={80} style="object-position:center 30%;" />
             </div>
             <div class="carousel-slide">
-              <Image src={clothesImg} alt="Cycle Care clothing collection" width={600} height={400} quality={80} style="object-position:center 1%;" />
+              <Image src={clothesImg} alt="Cycle Care clothing" width={800} height={500} quality={80} style="object-position:center 1%;" />
             </div>
           </div>
           <button class="carousel-btn prev" onclick="moveCarousel('cc',-1)">&#8249;</button>
@@ -65,56 +101,19 @@ import clothesImg from '../assets/images/Clothes.jpg';
             <div class="dot" onclick="goToSlide('cc',2)"></div>
           </div>
         </div>
-        <div class="proj-body">
+        <div class="proj-panel-info">
           <div class="proj-tags">
             <span class="tag">Sustainability</span>
             <span class="tag">Campaign Strategy</span>
             <span class="tag">Marketing</span>
           </div>
-          <div class="proj-title">Cycle Care</div>
+          <div class="proj-panel-title">Cycle Care</div>
           <p class="proj-desc">
-            <strong>Problem:</strong> Textile waste at community colleges goes largely unaddressed — students discard clothing with no sustainable alternative.<br/>
-            <strong>Built:</strong> Founded and led Cycle Care at SDCC — developed the brand strategy, messaging framework, outreach materials, and coordinated collection events to drive community participation.<br/>
+            <strong>Problem:</strong> Textile waste at community colleges goes largely unaddressed — students discard clothing with no sustainable alternative.<br/><br/>
+            <strong>Built:</strong> Founded and led Cycle Care at SDCC — developed the brand strategy, messaging framework, outreach materials, and coordinated collection events to drive participation.<br/><br/>
             <strong>Result:</strong> Measurable community impact documented in a formal impact report, with student engagement across campus.
           </p>
-          <a
-            href="/docs/Winnie and Rafael Final Impact Report.pdf"
-            target="_blank"
-            style="display:inline-block;margin-top:1rem;background:var(--terra);color:var(--cream);padding:0.5rem 1.2rem;border-radius:0.4rem;font-size:0.82rem;font-weight:700;text-decoration:none;"
-          >View Impact Report →</a>
-        </div>
-      </div>
-
-      <!-- Nymbus -->
-      <div class="proj-card wide fade-in">
-        <div class="nymbus-preview">
-          <img src="/nymbus-stock1.png" alt="Nymbus dashboard screenshot" class="nymbus-screenshot" />
-        </div>
-        <div class="proj-body">
-          <div class="proj-tags">
-            <span class="tag">Full-Stack</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">PWA</span>
-            <span class="tag">REST API</span>
-            <span class="tag">Deployed</span>
-          </div>
-          <div class="proj-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
-            Nymbus
-            <a
-              href="https://nymbus.pro"
-              target="_blank"
-              style="font-size:0.78rem;font-weight:700;color:var(--terra);text-decoration:none;border:1px solid rgba(13,110,79,0.3);padding:0.25rem 0.8rem;border-radius:0.3rem;transition:all 0.2s;"
-              onmouseover="this.style.background='rgba(13,110,79,0.1)'"
-              onmouseout="this.style.background='transparent'"
-            >View Live →</a>
-          </div>
-          <p class="proj-desc">
-            <strong>Problem:</strong> Tracking job applications in a spreadsheet meant losing context, missing follow-ups, and no visibility into your pipeline.<br/>
-            <strong>Built:</strong> A full-stack PWA with Node.js/Express, PostgreSQL, JWT auth with email verification, Kanban board, interview calendar, analytics dashboard, CSV export, and a bookmarklet for one-click saving from any job board.<br/>
-            <strong>Result:</strong> Launched to real users — tracking <span id="nymbus-desc-total">hundreds of</span> applications across the platform.
-          </p>
+          <a href="/docs/Winnie and Rafael Final Impact Report.pdf" target="_blank" class="proj-cta">View Impact Report →</a>
         </div>
       </div>
 
@@ -122,27 +121,21 @@ import clothesImg from '../assets/images/Clothes.jpg';
   </div>
 </section>
 
-<style>
-  @keyframes pulse-dot {
-    0% { box-shadow: 0 0 0 0 rgba(90,173,106,0.4); }
-    70% { box-shadow: 0 0 0 6px rgba(90,173,106,0); }
-    100% { box-shadow: 0 0 0 0 rgba(90,173,106,0); }
-  }
-</style>
-
 <script is:inline>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.proj-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.proj-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    var panel = document.getElementById('panel-' + id);
+    if (panel) panel.classList.add('active');
+  }
+
   (function () {
     fetch('https://nymbus.pro/stats/public')
       .then(r => r.json())
       .then(data => {
-        const total = data.total || 0;
-        const interviews = data.interviews || 0;
-        const el = document.getElementById('nymbus-stat-total');
-        const eli = document.getElementById('nymbus-stat-interviews');
-        const eld = document.getElementById('nymbus-desc-total');
-        if (el) el.textContent = total.toLocaleString();
-        if (eli) eli.textContent = interviews.toLocaleString();
-        if (eld) eld.textContent = total.toLocaleString();
+        var el = document.getElementById('nymbus-desc-total');
+        if (el) el.textContent = (data.total || 0).toLocaleString();
       })
       .catch(() => {});
   })();
