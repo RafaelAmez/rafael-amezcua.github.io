@@ -199,6 +199,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     onEnter(document.querySelector('.skills-grid'), el => {
       anime({ targets: el.querySelectorAll('.skill-group'), translateY: [30, 0], opacity: [0, 1], duration: 600, delay: anime.stagger(80), easing: 'easeOutCubic' });
       anime({ targets: el.querySelectorAll('.skill-tag'), scale: [0.85, 1], opacity: [0, 1], duration: 500, delay: anime.stagger(35, { from: 'center' }), easing: 'easeOutBack' });
+      // Animate radial rings
+      el.querySelectorAll('.ring-fill').forEach(ring => {
+        const level = ring.dataset.level || 0;
+        setTimeout(() => { ring.style.strokeDasharray = `${level} 100`; }, 200);
+      });
+      // Animate progress bars
+      el.querySelectorAll('.skill-group-bar-fill').forEach(bar => {
+        const level = bar.dataset.level || 0;
+        setTimeout(() => { bar.style.width = `${level}%`; }, 200);
+      });
     }, 0.08);
     onEnter(document.querySelector('.timeline'), el => {
       anime({ targets: el.querySelectorAll('.tl-item'), translateX: [-50, 0], opacity: [0, 1], duration: 650, delay: anime.stagger(110), easing: 'easeOutExpo' });
@@ -220,6 +230,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         h3.closest('.skill-group').classList.toggle('open');
       });
     });
+
+    // ── NYMBUS TAB SWITCHER ──
+    window.nymbusTab = function(tab, btn) {
+      document.querySelectorAll('.nymbus-tab-panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.nymbus-tab').forEach(b => b.classList.remove('active'));
+      const panel = document.getElementById('tab-' + tab);
+      if (panel) panel.style.display = '';
+      btn.classList.add('active');
+    };
 
     // ── ACTIVE NAV LINKS ──
     const secs = document.querySelectorAll('section[id]');

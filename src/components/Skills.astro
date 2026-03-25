@@ -1,4 +1,63 @@
 ---
+const groups = [
+  {
+    name: 'Marketing', level: 85,
+    skills: [
+      { name: 'Brand Strategy' },
+      { name: 'Campaign Planning' },
+      { name: 'Content Marketing' },
+      { name: 'Market Research' },
+    ]
+  },
+  {
+    name: 'Design', level: 78,
+    skills: [
+      { name: 'Adobe Photoshop', icon: 'adobephotoshop' },
+      { name: 'Adobe Illustrator', icon: 'adobeillustrator' },
+      { name: 'Logo Design' },
+      { name: 'Visual Identity' },
+    ]
+  },
+  {
+    name: 'Management', level: 82,
+    skills: [
+      { name: 'Project Management' },
+      { name: 'Team Leadership' },
+      { name: 'Strategic Planning' },
+      { name: 'Public Speaking' },
+    ]
+  },
+  {
+    name: 'Analytics', level: 74,
+    skills: [
+      { name: 'Google Analytics', icon: 'googleanalytics' },
+      { name: 'SQL', icon: 'mysql' },
+      { name: 'Data Visualization' },
+      { name: 'Google Sheets', icon: 'googlesheets' },
+    ]
+  },
+  {
+    name: 'Tools', level: 80,
+    skills: [
+      { name: 'Git & GitHub', icon: 'git' },
+      { name: 'ClickUp', icon: 'clickup' },
+      { name: 'Google Workspace', icon: 'google' },
+      { name: 'Slack', icon: 'slack' },
+      { name: 'Railway', icon: 'railway' },
+    ]
+  },
+  {
+    name: 'Technical', level: 73,
+    skills: [
+      { name: 'Node.js', icon: 'nodedotjs' },
+      { name: 'PostgreSQL', icon: 'postgresql' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'HTML / CSS', icon: 'html5' },
+      { name: 'Astro', icon: 'astro' },
+      { name: 'REST APIs' },
+    ]
+  },
+];
 ---
 
 <section id="skills">
@@ -6,65 +65,48 @@
     <p class="s-label fade-in">What I Bring</p>
     <h2 class="s-title fade-in">Skills & Tools</h2>
     <div class="s-divider fade-in"></div>
+
     <div class="skills-grid fade-in">
-      <div class="skill-group">
-        <h3>Marketing</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Brand Strategy</span>
-          <span class="skill-tag">Campaign Planning</span>
-          <span class="skill-tag">Content Marketing</span>
-          <span class="skill-tag">Market Research</span>
+      {groups.map((g) => (
+        <div class="skill-group">
+          <div class="skill-group-header">
+            <!-- Radial ring -->
+            <svg class="skill-ring" viewBox="0 0 36 36" aria-hidden="true">
+              <circle class="ring-bg" cx="18" cy="18" r="15.9"/>
+              <circle
+                class="ring-fill"
+                cx="18" cy="18" r="15.9"
+                stroke-dasharray="0 100"
+                data-level={g.level}
+              />
+              <text x="18" y="20.8" class="ring-pct">{g.level}</text>
+            </svg>
+            <div class="skill-group-meta">
+              <h3 class="skill-group-name">{g.name}</h3>
+              <div class="skill-group-bar">
+                <div class="skill-group-bar-fill" data-level={g.level} style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="skill-tags">
+            {g.skills.map((s) => (
+              <span class="skill-tag">
+                {s.icon && (
+                  <img
+                    src={`https://cdn.simpleicons.org/${s.icon}`}
+                    width="13"
+                    height="13"
+                    alt=""
+                    loading="lazy"
+                    class="skill-icon"
+                  />
+                )}
+                {s.name}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-      <div class="skill-group">
-        <h3>Design</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Adobe Photoshop</span>
-          <span class="skill-tag">Adobe Illustrator</span>
-          <span class="skill-tag">Logo Design</span>
-          <span class="skill-tag">Visual Identity</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Management</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Project Management</span>
-          <span class="skill-tag">Team Leadership</span>
-          <span class="skill-tag">Strategic Planning</span>
-          <span class="skill-tag">Public Speaking</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Analytics</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Google Analytics 4</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">Data Visualization</span>
-          <span class="skill-tag">Excel / Google Sheets</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Tools</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Git & GitHub</span>
-          <span class="skill-tag">ClickUp</span>
-          <span class="skill-tag">Google Workspace</span>
-          <span class="skill-tag">Slack</span>
-          <span class="skill-tag">Railway</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>Technical</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Node.js / Express</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">JavaScript (ES6+)</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">HTML / CSS</span>
-          <span class="skill-tag">Astro</span>
-          <span class="skill-tag">PWA</span>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>

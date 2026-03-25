@@ -88,56 +88,87 @@ import clothesImg from '../assets/images/Clothes.jpg';
 
       <!-- Nymbus -->
       <div class="proj-card wide fade-in">
-        <div class="proj-thumb" style="background:linear-gradient(135deg,#e8e8f4,#f0eeff);height:240px;display:flex;align-items:center;justify-content:center;padding:2rem;gap:2rem;position:relative;overflow:hidden;">
-          <div style="flex:1;max-width:480px;">
-            <div style="background:#fff;border:1px solid #ddd;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(127,119,221,0.15);">
-              <!-- Browser chrome -->
-              <div style="background:#f5f5f7;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8e8e8;">
-                <div style="display:flex;gap:5px;">
-                  <div style="width:9px;height:9px;border-radius:50%;background:#ff5f57;"></div>
-                  <div style="width:9px;height:9px;border-radius:50%;background:#febc2e;"></div>
-                  <div style="width:9px;height:9px;border-radius:50%;background:#28c840;"></div>
-                </div>
-                <div style="display:flex;align-items:center;gap:6px;background:#ebebeb;border-radius:6px;padding:3px 10px;">
-                  <img src="/nymbus-logo.png" style="width:13px;height:13px;border-radius:3px;" alt="Nymbus" />
-                  <span style="font-size:10px;color:#555;font-weight:600;">nymbus.pro</span>
-                </div>
-                <div style="width:60px;"></div>
+        <div class="nymbus-preview">
+          <!-- Browser chrome -->
+          <div class="nymbus-chrome">
+            <div class="nymbus-dots">
+              <span style="background:#ff5f57"></span>
+              <span style="background:#febc2e"></span>
+              <span style="background:#28c840"></span>
+            </div>
+            <!-- Tab switcher -->
+            <div class="nymbus-tabs">
+              <button class="nymbus-tab active" data-tab="dashboard" onclick="nymbusTab('dashboard',this)">Dashboard</button>
+              <button class="nymbus-tab" data-tab="kanban" onclick="nymbusTab('kanban',this)">Kanban</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;background:#ebebeb;border-radius:6px;padding:3px 10px;margin-left:auto;">
+              <img src="/nymbus-logo.png" style="width:12px;height:12px;border-radius:3px;" alt="" />
+              <span style="font-size:10px;color:#555;font-weight:600;">nymbus.pro</span>
+            </div>
+          </div>
+
+          <!-- Dashboard tab -->
+          <div class="nymbus-tab-panel" id="tab-dashboard">
+            <div class="nymbus-stats">
+              <div class="nymbus-stat-card" style="--c:#7f77dd;--bg:#f8f7ff;--br:#e8e6ff;">
+                <div class="nymbus-stat-label">Applications</div>
+                <div class="nymbus-stat-val" id="nymbus-stat-total">—</div>
               </div>
-              <!-- Stats row -->
-              <div style="padding:12px 14px 8px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
-                <div style="background:#f8f7ff;border:1px solid #e8e6ff;border-radius:8px;padding:8px 10px;">
-                  <div style="font-size:8px;color:#aaa;text-transform:uppercase;margin-bottom:3px;letter-spacing:0.05em;">Applications</div>
-                  <div id="nymbus-stat-total" style="font-size:18px;font-weight:800;color:#7f77dd;">—</div>
-                </div>
-                <div style="background:#fffbf0;border:1px solid #f0e8cc;border-radius:8px;padding:8px 10px;">
-                  <div style="font-size:8px;color:#aaa;text-transform:uppercase;margin-bottom:3px;letter-spacing:0.05em;">Interviews</div>
-                  <div id="nymbus-stat-interviews" style="font-size:18px;font-weight:800;color:#d4a847;">—</div>
-                </div>
-                <div style="background:#f0f8ff;border:1px solid #cce0f5;border-radius:8px;padding:8px 10px;">
-                  <div style="font-size:8px;color:#aaa;text-transform:uppercase;margin-bottom:3px;letter-spacing:0.05em;">Users</div>
-                  <div id="nymbus-stat-users" style="font-size:18px;font-weight:800;color:#6a9fd8;">Live</div>
-                </div>
+              <div class="nymbus-stat-card" style="--c:#d4a847;--bg:#fffbf0;--br:#f0e8cc;">
+                <div class="nymbus-stat-label">Interviews</div>
+                <div class="nymbus-stat-val" id="nymbus-stat-interviews">—</div>
               </div>
-              <!-- Table preview rows -->
-              <div style="padding:0 14px 10px;display:flex;flex-direction:column;gap:4px;">
-                <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fafafa;border-radius:6px;border-left:3px solid #d4a847;">
-                  <div style="width:20px;height:20px;border-radius:5px;background:#7f77dd;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:bold;color:#fff;flex-shrink:0;">P</div>
-                  <span style="font-size:10px;color:#333;font-weight:600;flex:1;">Precisely</span>
-                  <span style="font-size:9px;color:#6a9fd8;background:#e8f2fc;border-radius:10px;padding:1px 7px;">interview</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fafafa;border-radius:6px;border-left:3px solid #5aad6a;">
-                  <div style="width:20px;height:20px;border-radius:5px;background:#5aad6a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:bold;color:#fff;flex-shrink:0;">M</div>
-                  <span style="font-size:10px;color:#333;font-weight:600;flex:1;">Mercury Health</span>
-                  <span style="font-size:9px;color:#5aad6a;background:#e8f5ec;border-radius:10px;padding:1px 7px;">offer</span>
-                </div>
+              <div class="nymbus-stat-card" style="--c:#6a9fd8;--bg:#f0f8ff;--br:#cce0f5;">
+                <div class="nymbus-stat-label">Users</div>
+                <div class="nymbus-stat-val" style="color:#6a9fd8;">Live</div>
+              </div>
+              <div class="nymbus-stat-card" style="--c:#5aad6a;--bg:#f0fff4;--br:#b2e8be;">
+                <div class="nymbus-stat-label">Offers</div>
+                <div class="nymbus-stat-val" id="nymbus-stat-offers">—</div>
+              </div>
+            </div>
+            <div class="nymbus-rows">
+              <div class="nymbus-row" style="border-left-color:#d4a847;">
+                <div class="nymbus-avatar" style="background:#7f77dd;">P</div>
+                <span class="nymbus-row-name">Precisely</span>
+                <span class="nymbus-badge" style="color:#6a9fd8;background:#e8f2fc;">Interview</span>
+              </div>
+              <div class="nymbus-row" style="border-left-color:#5aad6a;">
+                <div class="nymbus-avatar" style="background:#5aad6a;">M</div>
+                <span class="nymbus-row-name">Mercury Health</span>
+                <span class="nymbus-badge" style="color:#5aad6a;background:#e8f5ec;">Offer</span>
+              </div>
+              <div class="nymbus-row" style="border-left-color:#aaa;">
+                <div class="nymbus-avatar" style="background:#bbb;">A</div>
+                <span class="nymbus-row-name">Apex Solutions</span>
+                <span class="nymbus-badge" style="color:#aaa;background:#f2f2f2;">Applied</span>
               </div>
             </div>
           </div>
+
+          <!-- Kanban tab -->
+          <div class="nymbus-tab-panel" id="tab-kanban" style="display:none;">
+            <div class="nymbus-kanban">
+              <div class="kanban-col">
+                <div class="kanban-col-header" style="color:#aaa;">Applied</div>
+                <div class="kanban-card"><div class="kanban-avatar" style="background:#bbb;">A</div>Apex Solutions</div>
+                <div class="kanban-card"><div class="kanban-avatar" style="background:#c46a6a;">R</div>Redline Corp</div>
+              </div>
+              <div class="kanban-col">
+                <div class="kanban-col-header" style="color:#d4a847;">Interview</div>
+                <div class="kanban-card" style="border-color:#d4a847;"><div class="kanban-avatar" style="background:#7f77dd;">P</div>Precisely</div>
+              </div>
+              <div class="kanban-col">
+                <div class="kanban-col-header" style="color:#5aad6a;">Offer</div>
+                <div class="kanban-card" style="border-color:#5aad6a;"><div class="kanban-avatar" style="background:#5aad6a;">M</div>Mercury Health</div>
+              </div>
+            </div>
+          </div>
+
           <!-- Live badge -->
-          <div style="position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:5px;background:rgba(90,173,106,0.12);border:1px solid rgba(90,173,106,0.3);border-radius:20px;padding:4px 10px;">
-            <div style="width:6px;height:6px;border-radius:50%;background:#5aad6a;box-shadow:0 0 0 0 rgba(90,173,106,0.4);animation:pulse-dot 1.5s infinite;"></div>
-            <span style="font-size:10px;font-weight:700;color:#5aad6a;letter-spacing:0.05em;">LIVE</span>
+          <div class="nymbus-live-badge">
+            <span class="nymbus-live-dot"></span>
+            LIVE
           </div>
         </div>
         <div class="proj-body">

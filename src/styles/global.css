@@ -529,6 +529,80 @@ section{padding:7rem 3rem;}
 .proj-title{font-size:1.2rem;font-weight:800;margin-bottom:0.5rem;}
 .proj-desc{font-size:0.87rem;color:var(--text-muted);line-height:1.7;}
 
+/* ── NYMBUS PREVIEW MOCKUP ── */
+.nymbus-preview{
+  position:relative;background:#fff;
+  border-bottom:1px solid #e8e8e8;
+  overflow:hidden;
+}
+.nymbus-chrome{
+  background:#f5f5f7;padding:8px 12px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid #e8e8e8;
+}
+.nymbus-dots{display:flex;gap:5px;flex-shrink:0;}
+.nymbus-dots span{width:9px;height:9px;border-radius:50%;display:block;}
+.nymbus-tabs{display:flex;gap:2px;margin-left:8px;}
+.nymbus-tab{
+  background:none;border:none;cursor:pointer;
+  font-size:10px;font-weight:600;color:#888;
+  padding:4px 10px;border-radius:6px;
+  font-family:system-ui,sans-serif;
+  transition:background 0.15s,color 0.15s;
+}
+.nymbus-tab:hover{background:#e8e8e8;color:#555;}
+.nymbus-tab.active{background:#fff;color:#7f77dd;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+.nymbus-tab-panel{padding:10px 12px 8px;}
+.nymbus-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px;}
+.nymbus-stat-card{
+  background:var(--bg,#f8f7ff);border:1px solid var(--br,#e8e6ff);
+  border-radius:8px;padding:7px 9px;
+}
+.nymbus-stat-label{font-size:7px;color:#aaa;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;font-family:system-ui;}
+.nymbus-stat-val{font-size:17px;font-weight:800;color:var(--c,#7f77dd);font-family:system-ui;}
+.nymbus-rows{display:flex;flex-direction:column;gap:4px;}
+.nymbus-row{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 8px;background:#fafafa;
+  border-radius:6px;border-left:3px solid #ddd;
+}
+.nymbus-avatar{
+  width:20px;height:20px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:bold;color:#fff;flex-shrink:0;
+  font-family:system-ui;
+}
+.nymbus-row-name{font-size:10px;color:#333;font-weight:600;flex:1;font-family:system-ui;}
+.nymbus-badge{font-size:9px;border-radius:10px;padding:1px 7px;font-family:system-ui;font-weight:600;}
+/* Kanban */
+.nymbus-kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.kanban-col{display:flex;flex-direction:column;gap:5px;}
+.kanban-col-header{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0 2px 4px;border-bottom:2px solid currentColor;font-family:system-ui;}
+.kanban-card{
+  background:#fafafa;border:1px solid #eee;border-radius:6px;
+  padding:6px 8px;font-size:10px;color:#333;font-weight:600;
+  display:flex;align-items:center;gap:6px;font-family:system-ui;
+}
+.kanban-avatar{
+  width:18px;height:18px;border-radius:4px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7px;font-weight:bold;color:#fff;font-family:system-ui;
+}
+/* Live badge */
+.nymbus-live-badge{
+  position:absolute;top:10px;right:10px;
+  display:flex;align-items:center;gap:5px;
+  background:rgba(90,173,106,0.1);border:1px solid rgba(90,173,106,0.3);
+  border-radius:20px;padding:3px 9px;
+  font-size:9px;font-weight:700;color:#5aad6a;letter-spacing:0.06em;
+  font-family:system-ui;
+}
+.nymbus-live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#5aad6a;flex-shrink:0;
+  animation:pulseGreen 1.5s infinite;
+}
+
 /* IF brand mockup */
 .if-mockup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;height:100%;padding:2rem;}
 .if-logo-mark{
@@ -546,19 +620,51 @@ section{padding:7rem 3rem;}
 #skills{background:var(--dark);}
 #skills .s-title{color:var(--cream);}
 #skills .s-label{color:var(--terra2);}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
-.skill-group h3{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem;}
-.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
-.skill-tag{
-  background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.75);
-  border:1px solid rgba(13,110,79,0.3);border-radius:0.4rem;
-  padding:0.4rem 0.85rem;font-size:0.8rem;font-weight:500;
-  transition:background 0.2s,border-color 0.2s,color 0.2s;
-  position:relative;overflow:hidden;
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;}
+.skill-group{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(18,163,114,0.12);
+  border-radius:1rem;padding:1.4rem;
+  transition:border-color 0.3s,background 0.3s;
 }
-.skill-tag::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--terra2),transparent);opacity:0;transition:opacity 0.3s;}
-.skill-tag:hover{background:rgba(13,110,79,0.18);border-color:var(--terra2);color:var(--terra2);}
-.skill-tag:hover::after{opacity:0.12;}
+.skill-group:hover{border-color:rgba(18,163,114,0.28);background:rgba(255,255,255,0.05);}
+.skill-group-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
+/* Radial ring */
+.skill-ring{width:46px;height:46px;flex-shrink:0;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:2.8;}
+.ring-fill{
+  fill:none;stroke:var(--terra2);stroke-width:2.8;
+  stroke-linecap:round;
+  transition:stroke-dasharray 1.3s cubic-bezier(0.4,0,0.2,1);
+}
+.ring-pct{
+  font-size:7px;font-weight:700;fill:rgba(255,255,255,0.55);
+  text-anchor:middle;dominant-baseline:middle;
+  transform:rotate(90deg);transform-origin:18px 18px;
+  font-family:system-ui,sans-serif;
+}
+.skill-group-meta{flex:1;min-width:0;}
+.skill-group-name{
+  font-size:0.78rem;text-transform:uppercase;letter-spacing:0.12em;
+  color:rgba(255,255,255,0.7);font-weight:700;margin-bottom:0.5rem;
+}
+.skill-group-bar{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
+.skill-group-bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--terra),var(--terra2));
+  border-radius:2px;
+  transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+/* Skill chips */
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.skill-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);
+  border:1px solid rgba(18,163,114,0.18);border-radius:100px;
+  padding:0.28rem 0.75rem;font-size:0.74rem;font-weight:500;
+  transition:background 0.2s,border-color 0.2s,color 0.2s;
+}
+.skill-tag:hover{background:rgba(18,163,114,0.14);border-color:var(--terra2);color:rgba(255,255,255,0.9);}
+.skill-icon{display:block;flex-shrink:0;opacity:0.85;}
 
 /* ── RESUME ── */
 #resume{background:var(--cream);transition:background 0.3s;}
