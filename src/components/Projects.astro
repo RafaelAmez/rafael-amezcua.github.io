@@ -180,17 +180,18 @@ import clothesImg from '../assets/images/Clothes.jpg';
     var next = slides[idx];
     if (!next || idx === ifIdx) return;
 
+    // Fade out current, reshape container, fade in next
     current.style.opacity = '0';
+    carousel.style.aspectRatio = next.dataset.ratio || 'auto';
     setTimeout(function () {
       current.classList.remove('active');
       ifIdx = idx;
-      carousel.style.aspectRatio = next.dataset.ratio || 'auto';
       next.classList.add('active');
       next.style.opacity = '1';
       document.querySelectorAll('#if-dots .dot').forEach(function (d, i) {
         d.classList.toggle('active', i === ifIdx);
       });
-    }, 200);
+    }, 220);
   }
 
   function moveIF(dir) {
@@ -199,6 +200,14 @@ import clothesImg from '../assets/images/Clothes.jpg';
     var total = carousel.querySelectorAll('.if-slide').length;
     goIF((ifIdx + dir + total) % total);
   }
+
+  // Sync container aspect-ratio to the first slide on load
+  document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.getElementById('if-carousel');
+    if (!carousel) return;
+    var first = carousel.querySelector('.if-slide[data-ratio]');
+    if (first) carousel.style.aspectRatio = first.dataset.ratio;
+  });
 
   (function () {
     fetch('https://nymbus.pro/stats/public')

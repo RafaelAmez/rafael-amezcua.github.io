@@ -1060,7 +1060,7 @@ footer{background:var(--dark);padding:3rem 3rem 2rem;}
   .proj-tab.active::after{bottom:unset;top:0;height:2px;}
   .proj-panel.active{grid-template-columns:1fr;min-height:unset;}
   .proj-panel-img{min-height:unset;height:240px;}
-  .if-panel-img{height:unset;aspect-ratio:1080/1350;}
+  .if-panel-img{height:unset;}
   .proj-panel-info{border-left:none;border-top:1px solid var(--border);padding:1.4rem;}
 
   /* Skills accordion */
