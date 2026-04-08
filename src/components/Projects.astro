@@ -57,7 +57,7 @@ import clothesImg from '../assets/images/Clothes.jpg';
           <p class="proj-desc">
             <strong>Problem:</strong> Tracking job applications in a spreadsheet meant losing context, missing follow-ups, and no visibility into your pipeline.<br/><br/>
             <strong>Built:</strong> A full-stack PWA with Node.js/Express, PostgreSQL, JWT auth, Kanban board, interview calendar, analytics dashboard, CSV export, and a bookmarklet for one-click saving from any job board.<br/><br/>
-            <strong>Result:</strong> Launched to real users — tracking <span id="nymbus-desc-total">hundreds of</span> applications across the platform.
+            <strong>Result:</strong> Launched to real users, tracking <span id="nymbus-desc-total">hundreds of</span> applications across the platform.
           </p>
           <a href="https://nymbus.pro" target="_blank" class="proj-cta">View Live →</a>
         </div>
@@ -66,7 +66,40 @@ import clothesImg from '../assets/images/Clothes.jpg';
       <!-- Intertwine Fitness -->
       <div class="proj-panel" id="panel-intertwine">
         <div class="proj-panel-img if-panel-img" id="if-carousel">
-          <img id="if-slide-img" src="/if-brand-intro.svg" alt="Brand Introduction" />
+
+          <!-- Slide 0: live website preview -->
+          <div class="if-slide active" data-ratio="1600/1000">
+            <div class="if-browser-mock">
+              <div class="if-browser-bar">
+                <div class="if-browser-dots">
+                  <span class="if-dot" style="background:#ff5f57"></span>
+                  <span class="if-dot" style="background:#febc2e"></span>
+                  <span class="if-dot" style="background:#28c840"></span>
+                </div>
+                <div class="if-browser-url">intertwinefitness.com</div>
+              </div>
+              <div class="if-browser-viewport">
+                <iframe
+                  src="https://www.intertwinefitness.com"
+                  title="Intertwine Fitness website preview"
+                  loading="lazy"
+                  scrolling="no"
+                  tabindex="-1"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 1: Brand Introduction -->
+          <div class="if-slide" data-ratio="1080/1350">
+            <img src="/if-brand-intro.svg" alt="Brand Introduction" />
+          </div>
+
+          <!-- Slide 2: Website Redesign Announcement -->
+          <div class="if-slide" data-ratio="1080/1350">
+            <img src="/if-redesign.svg" alt="Website Redesign Announcement" />
+          </div>
+
           <button class="carousel-btn prev" onclick="moveIF(-1)">&#8249;</button>
           <button class="carousel-btn next" onclick="moveIF(1)">&#8250;</button>
           <div class="carousel-dots" id="if-dots">
@@ -84,8 +117,8 @@ import clothesImg from '../assets/images/Clothes.jpg';
           </div>
           <div class="proj-panel-title">Intertwine Fitness</div>
           <p class="proj-desc">
-            <strong>Problem:</strong> A local fitness brand had no visual identity — no logo, no color system, no way to stand out in a crowded market.<br/><br/>
-            <strong>Built:</strong> Designed the full brand identity from scratch — wordmark, logo system, color palette, and typography — using Illustrator with a focus on strength, connectivity, and movement.<br/><br/>
+            <strong>Problem:</strong> A local fitness brand had no visual identity: no logo, no color system, no way to stand out in a crowded market.<br/><br/>
+            <strong>Built:</strong> Designed the full brand identity from scratch: wordmark, logo system, color palette, and typography using Illustrator with a focus on strength, connectivity, and movement.<br/><br/>
             <strong>Result:</strong> A cohesive, production-ready brand system currently live at intertwinefitness.com.
           </p>
           <a href="https://www.intertwinefitness.com" target="_blank" class="proj-cta">View Site →</a>
@@ -122,8 +155,8 @@ import clothesImg from '../assets/images/Clothes.jpg';
           </div>
           <div class="proj-panel-title">Cycle Care</div>
           <p class="proj-desc">
-            <strong>Problem:</strong> Textile waste at community colleges goes largely unaddressed — students discard clothing with no sustainable alternative.<br/><br/>
-            <strong>Built:</strong> Founded and led Cycle Care at SDCC — developed the brand strategy, messaging framework, outreach materials, and coordinated collection events to drive participation.<br/><br/>
+            <strong>Problem:</strong> Textile waste at community colleges goes largely unaddressed. Students discard clothing with no sustainable alternative.<br/><br/>
+            <strong>Built:</strong> Founded and led Cycle Care at SDCC, developing the brand strategy, messaging framework, outreach materials, and coordinating collection events to drive participation.<br/><br/>
             <strong>Result:</strong> Measurable community impact documented in a formal impact report, with student engagement across campus.
           </p>
           <a href="/docs/Winnie and Rafael Final Impact Report.pdf" target="_blank" class="proj-cta">View Impact Report →</a>
@@ -143,33 +176,34 @@ import clothesImg from '../assets/images/Clothes.jpg';
     if (panel) panel.classList.add('active');
   }
 
-  var ifSlides = [
-    { src: '/if-brand-intro.svg',  alt: 'Brand Introduction',              ratio: '1080/1350' },
-    { src: '/if-redesign.svg',     alt: 'Website Redesign Announcement',   ratio: '1080/1350' },
-    { src: '/if-1.png',            alt: 'Intertwine Fitness',              ratio: '1871/1147' },
-  ];
   var ifIdx = 0;
 
   function goIF(idx) {
-    ifIdx = idx;
     var carousel = document.getElementById('if-carousel');
-    var img = document.getElementById('if-slide-img');
-    if (!carousel || !img) return;
-    img.style.opacity = '0';
+    if (!carousel) return;
+    var slides = carousel.querySelectorAll('.if-slide');
+    var current = slides[ifIdx];
+    var next = slides[idx];
+    if (!next || idx === ifIdx) return;
+
+    current.style.opacity = '0';
     setTimeout(function () {
-      var slide = ifSlides[ifIdx];
-      img.src = slide.src;
-      img.alt = slide.alt;
-      carousel.style.aspectRatio = slide.ratio;
-      img.style.opacity = '1';
+      current.classList.remove('active');
+      ifIdx = idx;
+      carousel.style.aspectRatio = next.dataset.ratio || 'auto';
+      next.classList.add('active');
+      next.style.opacity = '1';
       document.querySelectorAll('#if-dots .dot').forEach(function (d, i) {
         d.classList.toggle('active', i === ifIdx);
       });
-    }, 190);
+    }, 200);
   }
 
   function moveIF(dir) {
-    goIF((ifIdx + dir + ifSlides.length) % ifSlides.length);
+    var carousel = document.getElementById('if-carousel');
+    if (!carousel) return;
+    var total = carousel.querySelectorAll('.if-slide').length;
+    goIF((ifIdx + dir + total) % total);
   }
 
   (function () {
