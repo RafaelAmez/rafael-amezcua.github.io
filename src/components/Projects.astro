@@ -206,6 +206,27 @@ import clothesImg from '../assets/images/Clothes.jpg';
     goIF((ifIdx + dir + total) % total);
   }
 
+  // Scale the preview iframe to exactly fill its viewport with no whitespace
+  function scaleIFIframe() {
+    var viewport = document.querySelector('.if-browser-viewport');
+    var iframe = document.querySelector('.if-browser-viewport iframe');
+    if (!viewport || !iframe) return;
+    var vw = viewport.offsetWidth;
+    var vh = viewport.offsetHeight;
+    if (!vw || !vh) return;
+    var simW = 1440; // desktop viewport to simulate
+    var scale = vw / simW;
+    var simH = Math.round(vh / scale);
+    iframe.style.width  = simW + 'px';
+    iframe.style.height = simH + 'px';
+    iframe.style.transform = 'scale(' + scale + ')';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    scaleIFIframe();
+  });
+  window.addEventListener('resize', scaleIFIframe);
+
   (function () {
     fetch('https://nymbus.pro/stats/public')
       .then(r => r.json())

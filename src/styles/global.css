@@ -698,9 +698,8 @@ section{padding:7rem 3rem;}
 .if-browser-viewport{flex:1;overflow:hidden;position:relative;}
 .if-browser-viewport iframe{
   position:absolute;top:0;left:0;
-  width:280%;height:280%;
-  transform:scale(0.357);transform-origin:top left;
   border:none;pointer-events:none;
+  transform-origin:top left;
 }
 
 /* Cycle Care carousel inside panel */
